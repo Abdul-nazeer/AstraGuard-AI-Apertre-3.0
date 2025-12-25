@@ -179,11 +179,17 @@ pytest tests/ --cov=memory_engine --cov=anomaly_agent
 
 ## 📚 Documentation
 
-- 📄 [Technical Report](/report/AstraGuard%20AI_%20Autonomous%20Fault%20Detection%20&%20Recovery%20for%20Small%20Satellites.pdf)
-- 📋 [Proposal (Track 1: Agentic AI)](PROPOSAL.md)
-- 🏗️ [System Architecture](ARCHITECTURE.md)
-- 🌐 [Website Design Spec](WEBSITE_DESIGN.md)
-- 🎨 [Website Redesign (Round 2)](WEBSITE_REDESIGN.md)
+**Core Documentation:**
+- 📘 [Technical Documentation](docs/TECHNICAL.md)
+- 📋 [Hackathon Proposal - Track 1: Agentic AI](PROPOSAL.md)
+- 🏗️ [System Architecture & Technical Specifications](ARCHITECTURE.md)
+- 🌐 [Website Design Specification](WEBSITE_DESIGN.md)
+- 🎨 [Website Redesign - Round 2 Enhanced Proposal](WEBSITE_REDESIGN.md)
+
+**Additional Resources:**
+- 📖 [Pathway Documentation](https://pathway.com/docs)
+- 🐉 [Dragon Hatchling (BDH) Research](https://github.com/pathwaycom/bdh)
+- 🛠️ [LLM App Framework](https://github.com/pathwaycom/llm-app)
 
 ---
 
