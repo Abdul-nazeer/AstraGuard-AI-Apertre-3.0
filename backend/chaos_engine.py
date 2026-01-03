@@ -364,11 +364,42 @@ class ChaosEngine:
 
 
 async def main():
-    """Standalone chaos test runner."""
+    """Standalone chaos test runner.
+    
+    Requires AstraGuard services running at localhost:8000:
+    - Dashboard API server
+    - Redis service (for distributed consensus)
+    - Health monitoring endpoints
+    
+    To run this chaos test suite:
+    1. Start the dashboard: python -m dashboard.app
+    2. Ensure Redis is running: redis-cli ping
+    3. Run this script: python -m backend.chaos_engine
+    """
     engine = ChaosEngine()
-    await engine.startup()
     
     try:
+        await engine.startup()
+        
+        # Quick connectivity check
+        try:
+            async with engine.session.get(
+                f"{engine.base_url}/health/state", 
+                timeout=aiohttp.ClientTimeout(total=2)
+            ) as resp:
+                if resp.status != 200:
+                    raise ConnectionError(f"Health endpoint returned {resp.status}")
+        except Exception as conn_err:
+            logger.error(f"\n❌ CHAOS ENGINE STARTUP FAILED\n")
+            logger.error(f"Cannot connect to AstraGuard services at {engine.base_url}")
+            logger.error(f"Error: {conn_err}\n")
+            logger.error("Required services:")
+            logger.error("  1. Dashboard API: python -m dashboard.app")
+            logger.error("  2. Redis service: redis-cli ping")
+            logger.error("  3. Health endpoints: GET /health/state\n")
+            await engine.shutdown()
+            return 1
+        
         results = await engine.run_full_suite()
         all_passed = all(results.values())
         
@@ -378,6 +409,10 @@ async def main():
         else:
             logger.error("\n❌ SOME CHAOS TESTS FAILED - REVIEW RESILIENCE IMPLEMENTATION\n")
             return 1
+    except Exception as e:
+        logger.error(f"\n❌ CHAOS TEST SUITE FAILED WITH ERROR\n")
+        logger.error(f"Error: {e}\n")
+        return 1
     finally:
         await engine.shutdown()
 
