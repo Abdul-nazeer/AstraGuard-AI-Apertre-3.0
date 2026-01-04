@@ -168,19 +168,19 @@ graph TB
     C -.->|Memory State| G
     E -.->|Action Status| G
     
-    style A fill:#00ff88,stroke:#00cc70,stroke-width:3px,color:#000
-    style B fill:#00d4ff,stroke:#00a8cc,stroke-width:2px,color:#000
-    style C fill:#ff00ff,stroke:#cc00cc,stroke-width:2px,color:#fff
-    style D fill:#ffaa00,stroke:#cc8800,stroke-width:3px,color:#000
-    style E fill:#ff3366,stroke:#cc2952,stroke-width:2px,color:#fff
-    style F fill:#00ff88,stroke:#00cc70,stroke-width:2px,color:#000
-    style G fill:#95e1d3,stroke:#6bb1a3,stroke-width:2px,color:#000
+    style A fill:#10b981,stroke:#059669,stroke-width:4px,color:#fff
+    style B fill:#3b82f6,stroke:#2563eb,stroke-width:3px,color:#fff
+    style C fill:#8b5cf6,stroke:#7c3aed,stroke-width:3px,color:#fff
+    style D fill:#f59e0b,stroke:#d97706,stroke-width:4px,color:#fff
+    style E fill:#ef4444,stroke:#dc2626,stroke-width:3px,color:#fff
+    style F fill:#06b6d4,stroke:#0891b2,stroke-width:3px,color:#fff
+    style G fill:#ec4899,stroke:#db2777,stroke-width:3px,color:#fff
     
-    classDef inputClass fill:#e1f5ff,stroke:#b3d9ff,stroke-width:2px
-    classDef processClass fill:#fff4e1,stroke:#ffd9b3,stroke-width:2px
-    classDef intelligenceClass fill:#ffe1f5,stroke:#ffb3d9,stroke-width:2px
-    classDef actionClass fill:#ffe1e1,stroke:#ffb3b3,stroke-width:2px
-    classDef monitorClass fill:#e1ffe1,stroke:#b3ffb3,stroke-width:2px
+    classDef inputClass fill:#d1fae5,stroke:#6ee7b7,stroke-width:3px,color:#065f46
+    classDef processClass fill:#dbeafe,stroke:#93c5fd,stroke-width:3px,color:#1e40af
+    classDef intelligenceClass fill:#fef3c7,stroke:#fcd34d,stroke-width:3px,color:#92400e
+    classDef actionClass fill:#fee2e2,stroke:#fca5a5,stroke-width:3px,color:#991b1b
+    classDef monitorClass fill:#fce7f3,stroke:#f9a8d4,stroke-width:3px,color:#9f1239
     
     class Input inputClass
     class Processing processClass
