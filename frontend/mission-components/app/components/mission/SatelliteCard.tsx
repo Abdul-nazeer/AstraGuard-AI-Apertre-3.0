@@ -42,13 +42,18 @@ export const SatelliteCard: React.FC<Props> = ({
 
   return (
     <div
-      className={`group p-4 rounded-xl border-2 bg-black/30 backdrop-blur-sm cursor-pointer transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-2xl ${statusConfig.glowClass
-        } ${statusConfig.borderClass} ${isSelected ? `ring-4 ${statusConfig.ringClass} scale-105` : ''
-        }`}
+      className={`
+        p-4 rounded-xl border-2 bg-black/30 backdrop-blur-sm cursor-pointer
+        group hover:scale-105 hover:-translate-y-2 hover:shadow-2xl
+        transition-all duration-300 ease-out
+        ${statusConfig.glowClass} ${statusConfig.borderClass}
+        motion-safe:group-hover:[animation:lift-burst_0.6s_ease-out]
+        ${isSelected ? `ring-4 ${statusConfig.ringClass} scale-105` : ''}
+      `}
       onClick={onClick}
     >
       <div className="flex items-center justify-between mb-2">
-        <span className="text-sm font-mono opacity-75">LEO-{orbitSlot}</span>
+        <span className="text-sm font-mono opacity-75 hover-glitch transition-all duration-200">LEO-{orbitSlot}</span>
         <span className="text-xl">{statusConfig.icon}</span>
       </div>
       <div className="text-lg font-bold font-mono text-white mb-1 truncate">{status}</div>
