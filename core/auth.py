@@ -526,8 +526,9 @@ class APIKeyManager:
 
         # Audit logging for permission checks
         audit_logger = get_audit_logger()
+        event_type = AuditEventType.AUTHORIZATION_SUCCESS if has_permission else AuditEventType.AUTHORIZATION_FAILURE
         audit_logger.log_event(
-            AuditEventType.PERMISSION_CHECK,
+            event_type,
             user_id=user.id,
             resource="permission",
             action="check",
@@ -669,6 +670,7 @@ def require_permission(permission: Permission):
 # Convenience dependencies for common roles
 require_admin = require_permission(Permission.MANAGE_USERS)
 require_operator = require_permission(Permission.SUBMIT_TELEMETRY)
+require_phase_update = require_permission(Permission.UPDATE_PHASE)
 require_analyst = require_permission(Permission.READ_STATUS)
 
 
