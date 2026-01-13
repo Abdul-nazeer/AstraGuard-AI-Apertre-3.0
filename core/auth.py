@@ -11,7 +11,7 @@ import hashlib
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Tuple, Any, Set
 from enum import Enum
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass, asdict, field
 from pathlib import Path
 
 from cryptography.fernet import Fernet
@@ -137,10 +137,10 @@ class APIKey:
     name: str
     created_at: datetime
     expires_at: Optional[datetime] = None
-    permissions: Set[str] = {"read", "write"}  # Default permissions
+    permissions: Set[str] = field(default_factory=lambda: {"read", "write"})  # Default permissions
     rate_limit: int = 1000  # Requests per hour
     is_active: bool = True
-    metadata: Dict[str, str] = {}
+    metadata: Dict[str, str] = field(default_factory=dict)
 
 
 class APIKeyManager:
