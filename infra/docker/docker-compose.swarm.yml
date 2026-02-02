@@ -1,4 +1,4 @@
-version: '3.8'
+
 
 # Multi-Agent Docker Swarm Simulator for AstraGuard v3.0
 # Issue #414: Testing infrastructure for complete swarm intelligence pipeline
@@ -14,6 +14,9 @@ services:
   # ==================== LEADER CANDIDATE ====================
   agent-1:
     image: astraguard:swarm-v3.0
+    build:
+      context: ../../
+      dockerfile: infra/docker/Dockerfile
     container_name: astra-agent-1
     hostname: astra-agent-1
     environment:
@@ -77,6 +80,9 @@ services:
   # ==================== FOLLOWER AGENTS ====================
   agent-2:
     image: astraguard:swarm-v3.0
+    build:
+      context: ../../
+      dockerfile: infra/docker/Dockerfile
     container_name: astra-agent-2
     hostname: astra-agent-2
     environment:
@@ -126,6 +132,9 @@ services:
 
   agent-3:
     image: astraguard:swarm-v3.0
+    build:
+      context: ../../
+      dockerfile: infra/docker/Dockerfile
     container_name: astra-agent-3
     hostname: astra-agent-3
     environment:
@@ -175,6 +184,9 @@ services:
 
   agent-4:
     image: astraguard:swarm-v3.0
+    build:
+      context: ../../
+      dockerfile: infra/docker/Dockerfile
     container_name: astra-agent-4
     hostname: astra-agent-4
     environment:
@@ -224,6 +236,9 @@ services:
 
   agent-5:
     image: astraguard:swarm-v3.0
+    build:
+      context: ../../
+      dockerfile: infra/docker/Dockerfile
     container_name: astra-agent-5
     hostname: astra-agent-5
     environment:
