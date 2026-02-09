@@ -18,10 +18,6 @@ from fastapi.responses import JSONResponse
 import aiosqlite
 import aiofiles
 import asyncio
-from astraguard.logging_config import get_logger
-
-# Initialize logger
-logger = get_logger(__name__)
 
 # Rate limiting
 try:
@@ -272,37 +268,19 @@ async def save_submission(
 
 async def log_notification(submission: ContactSubmission, submission_id: int):
     """Log notification to file (fallback when email is not configured)"""
-    try:
-        DATA_DIR.mkdir(exist_ok=True)
-
-        log_entry = {
-            "timestamp": datetime.now().isoformat(),
-            "submission_id": submission_id,
-            "name": submission.name,
-            "email": submission.email,
-            "subject": submission.subject,
-            "message": submission.message[:100] + "..." if len(submission.message) > 100 else submission.message
-        }
-
-        async with aiofiles.open(NOTIFICATION_LOG, "a") as f:
-            await f.write(json.dumps(log_entry) + "\n")
-    except OSError as e:
-        logger.error(
-            "Failed to write notification log",
-            error_type=type(e).__name__,
-            error_message=str(e),
-            submission_id=submission_id,
-            log_path=str(NOTIFICATION_LOG)
-        )
-        raise
-    except Exception as e:
-        logger.error(
-            "Unexpected error during notification logging",
-            error_type=type(e).__name__,
-            error_message=str(e),
-            submission_id=submission_id
-        )
-        raise
+    DATA_DIR.mkdir(exist_ok=True)
+    
+    log_entry = {
+        "timestamp": datetime.now().isoformat(),
+        "submission_id": submission_id,
+        "name": submission.name,
+        "email": submission.email,
+        "subject": submission.subject,
+        "message": submission.message[:100] + "..." if len(submission.message) > 100 else submission.message
+    }
+    
+    async with aiofiles.open(NOTIFICATION_LOG, "a") as f:
+        await f.write(json.dumps(log_entry) + "\n")
 
 
 async def send_email_notification(submission: ContactSubmission, submission_id: int):
@@ -331,13 +309,7 @@ async def send_email_notification(submission: ContactSubmission, submission_id: 
             # response = sg.send(message)
             pass
         except Exception as e:
-            logger.warning(
-                "Email notification failed, falling back to file logging",
-                error_type=type(e).__name__,
-                error_message=str(e),
-                submission_id=submission_id,
-                email=submission.email
-            )
+            print(f"Email sending failed: {e}")
             await log_notification(submission, submission_id)
     else:
         # Fallback to file logging
